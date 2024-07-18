@@ -3,6 +3,7 @@ import React from "react";
 import User from "../assets/user.svg";
 import Card from "../components/Card";
 import { FlatList } from "react-native";
+import Loading from "./Loading";
 
 const renderItem = ({ item }) => (
   <Card></Card>
@@ -11,7 +12,6 @@ const renderItem = ({ item }) => (
 const data=[1,2,3,4,5]
 
 export default function Home() {
-
 
 
   return (
