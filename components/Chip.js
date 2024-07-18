@@ -18,13 +18,15 @@ export default function Chip({type,value,icon,color}) {
 
 const styles=StyleSheet.create({
     container:{
+        flex:1,
+        backgroundColor:'white',
         flexDirection:'row',
         paddingHorizontal:12,
         paddingVertical:12,
         borderRadius:8,
         borderColor:'#CFCFCF',
         gap:8,
-        borderWidth:1,
+        // borderWidth:1,
         width:'50%',
         alignItems:'center',
     }

@@ -6,12 +6,11 @@ import Ripple from "react-native-material-ripple";
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Card() {
-
+export default function Card({passedData}) {
 
   const navigation=useNavigation();
   const NavigatetoDetails=()=>{
-    navigation.navigate('Details');
+    navigation.navigate('Details',{passedData});
   }
 
   return (
@@ -20,19 +19,19 @@ export default function Card() {
         <View style={{flexDirection:'row',gap:4}}>
         <View style={styles.imgContainer}><Job height={25} width={25}></Job></View>
         <View>
-            <Text style={styles.boldText}>Tele Sales Executive</Text>
-            <Text style={styles.lightText}>HSR Layout Banglore</Text>
+        <Text style={styles.boldText}>{passedData.title.length > 20 ? `${passedData.title.substring(0, 20)}...` : passedData.title}</Text>
+            <Text style={styles.lightText}>{passedData.Place}</Text>
         </View>
         </View>
         <MaterialIcons name="verified" size={24} color="#06BCEE" />
       </View>
       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={{color:'grey'}}>Expected Salary</Text>
-        <Text style={{color:'#2A9FB8',fontFamily:'Poppins_500Medium'}}>₹18000 - ₹25000+</Text>
+        <Text style={{color:'#2A9FB8',fontFamily:'Poppins_500Medium'}}>₹ {passedData.salary.min}-{passedData.salary.max}</Text>
       </View>
       <View style={{flexDirection:'row'}}>
         <View style={{borderWidth:1,borderColor:'grey',paddingVertical:8,paddingHorizontal:8,borderRadius:14,backgroundColor:'#FAFAFA'}}>
-        <Text style={{fontSize:12,fontFamily:'Poppins_300Light',color:'grey'}}>834338438</Text>
+        <Text style={{fontSize:12,fontFamily:'Poppins_300Light',color:'grey'}}>{passedData.number}</Text>
         </View>
       </View>
     </Ripple>

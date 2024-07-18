@@ -1,33 +1,40 @@
-import { View, Text,StyleSheet, Pressable} from 'react-native'
+import { View,ScrollView, Text,StyleSheet, Pressable,ToastAndroid} from 'react-native'
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Brief from '../assets/briefcase.svg'
 import Chip from '../components/Chip';
-import { FontAwesome,FontAwesome5,AntDesign,Ionicons} from '@expo/vector-icons';
+import { FontAwesome,FontAwesome5,AntDesign,Ionicons,Feather} from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Ripple from 'react-native-material-ripple';
+import { useRoute } from '@react-navigation/native';
+
 
 export default function Details() {
 
   const navigation=useNavigation();
+  const route=useRoute();
+
+  const data=route.params.passedData;
 
   const BackIconPressHandler=()=>{
     navigation.navigate('Home')
   }
 
   const AddToBookMarksHandler=()=>{
-
+    ToastAndroid.show('Succesfully Bookmarked',ToastAndroid.SHORT)
   }
 
 
   return (
+    <ScrollView>
+
     <View style={styles.screen}>
       <View style={styles.headerContainer}>
         <Pressable onPress={BackIconPressHandler}>
         <Ionicons name="arrow-back-outline" size={28} color="black" />
         </Pressable>
         <Text style={{fontFamily:'Poppins_500Medium',fontSize:18}}>Job Details</Text>
-        <Ripple>
+        <Ripple onPress={AddToBookMarksHandler}>
         <MaterialCommunityIcons name="bookmark-plus-outline" size={30} color="black" />
         </Ripple>
       </View>
@@ -35,24 +42,25 @@ export default function Details() {
         <View style={styles.imgContainer}>
         <Brief height={45} width={45}></Brief>
         </View>
-        <Text style={{fontFamily:'Poppins_600SemiBold',fontSize:18}}>Junior Graphic Designer</Text>
-        <Text style={{fontFamily:'Poppins_400Regular',fontSize:14}}>Surathkhal India</Text>
+        <Text style={{fontFamily:'Poppins_600SemiBold',fontSize:18,textAlign:'center'}}>{data.title}</Text>
+        <Text style={{fontFamily:'Poppins_400Regular',fontSize:14}}>{data.Place}</Text>
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.row}>
-           <Chip type='Expected Salary' value='$2k-4k' icon={<FontAwesome name="money" size={24} color="black" />}  color='#EBF6F9'></Chip>
+           <Chip type='Expected Salary' value={`${data.salary.min/1000}k-${data.salary.max/1000}k`} icon={<FontAwesome name="money" size={24} color="black" />}  color='#EBF6F9'></Chip>
            <Chip type='Job Type' value='FullTime' icon={<FontAwesome5 name="briefcase" size={24} color="black" />}  color='#F9EBEB'></Chip>
         </View>
         <View style={styles.row}>
-        <Chip type='Working hours' value='8-5pm' icon={<AntDesign name="clockcircleo" size={24} color="black" />}  color='#F4F9EB'></Chip>
-        <Chip type='Qualification' value='Expert' icon={<Ionicons name="grid-outline" size={24} color="black" />}  color='#EBECF9'></Chip>
+        <Chip type='Views' value={data.views} icon={<AntDesign name="eyeo" size={24} color="black" />}  color='#F4F9EB'></Chip>
+        <Chip type='Openings' value={data.openings} icon={<Feather name="users" size={24} color="black" />}  color='#EBECF9'></Chip>
         </View>
       </View>
       <View style={styles.descriptionContainer}>
         <Text style={{fontFamily:'Poppins_600SemiBold',fontSize:18}}>Job description</Text>
-        <Text style={{fontFamily:'Poppins_400Regular',color:'grey',fontSize:13}}>Hatypo STudio is </Text>
+        <Text style={{fontFamily:'Poppins_400Regular',color:'grey',fontSize:13}}>{data.description} </Text>
       </View>
     </View>
+    </ScrollView>
   )
 }
 
@@ -61,7 +69,6 @@ const styles = StyleSheet.create({
       flex: 1,
       paddingHorizontal: 20,
       paddingVertical: 38,
-      paddingBottom:108,
       backgroundColor: "#F5F5F5",
     },
     headerContainer:{
@@ -87,7 +94,11 @@ const styles = StyleSheet.create({
     },
     descriptionContainer:{
       flexDirection:'column',
-      marginVertical:12
+      marginVertical:12,
+      paddingHorizontal:12,
+      backgroundColor:'white',
+      borderRadius:8,
+      paddingTop:8
     }
   });
   
