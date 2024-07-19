@@ -23,8 +23,8 @@ export default function OnBoarding() {
       </View>
       <View style={styles.bottomContainer}>
         <Text style={styles.lgText}>
-          Find the world's
-          most amazing job <Ionicons name="bag-sharp" size={24} color="white" /> 
+          Find the world's most amazing job{" "}
+          <Ionicons name="bag-sharp" size={24} color="white" />
         </Text>
         <View style={{ paddingHorizontal: 14 }}>
           <Text style={styles.smText}>

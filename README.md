@@ -11,7 +11,7 @@
 
 ## Project Description
 
-Job Finder is a mobile application designed to help users search and bookmark job listings. The app features a simple and intuitive user interface with two main sections: Jobs and Bookmarks. Users can browse job listings fetched from an API, view detailed information about each job, and bookmark jobs for offline viewing.
+Job Finder is a mobile application designed to help users find and bookmark job listings. The app features a simple and intuitive user interface with two main sections: Jobs and Bookmarks. Users can browse job listings fetched from an API, view detailed information about each job, and bookmark jobs for offline viewing.
 
 
 ## Preview
