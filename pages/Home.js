@@ -6,6 +6,7 @@ import { FlatList } from "react-native";
 import Loading from "./Loading";
 import axios from "axios";
 import { URL } from "../services";
+import Notfound from "./Notfound";
 
 const renderItem = ({ item }) =>{
   const passedData={}
@@ -27,6 +28,7 @@ export default function Home() {
 
   const [data,setData]=useState([]);
   const [isLoading,setIsLoading]=useState(false);
+  const [isError,setIsError]=useState(false);
   useEffect(()=>{
     
     const getData=async()=>{
@@ -37,6 +39,7 @@ export default function Home() {
       setData(data.results);
       }catch(err)
       {
+        setIsError(true)
         console.log("Something went wrong");
       }finally{
         setIsLoading(false);
@@ -47,6 +50,7 @@ export default function Home() {
 
   if(isLoading)
     return (<Loading></Loading>)
+
 
   return (
     <View style={styles.screen}>
@@ -79,6 +83,7 @@ export default function Home() {
         <Text style={{fontFamily:'Poppins_600SemiBold',fontSize:20}}>Trending jobs near you</Text>
       </View>
       <View style={{flexDirection:'col'}}>
+      {isError&&<Text>Something went wrong while fetching data</Text>}
       <FlatList
       showsVerticalScrollIndicator={false}
       data={data}
