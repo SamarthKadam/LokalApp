@@ -6,15 +6,16 @@ import Ripple from "react-native-material-ripple";
 import { Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Card({passedData}) {
+export default function Card({passedData,isPressable}) {
 
   const navigation=useNavigation();
   const NavigatetoDetails=()=>{
     navigation.navigate('Details',{passedData});
   }
 
+
   return (
-    <Ripple onPress={NavigatetoDetails} style={styles.container}>
+    <Ripple onPress={isPressable&&NavigatetoDetails} style={styles.container}>
       <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
         <View style={{flexDirection:'row',gap:4}}>
         <View style={styles.imgContainer}><Job height={25} width={25}></Job></View>

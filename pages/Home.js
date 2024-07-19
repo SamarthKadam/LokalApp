@@ -17,10 +17,9 @@ const renderItem = ({ item }) =>{
   passedData.views=item.views?item.views:'-'
   passedData.salary={min:item.salary_min?item.salary_min:'-',max:item.salary_max?item.salary_max:'-'}
   passedData.description=item.other_details?item.other_details:"Not available"
+  passedData.id=item.id?item.id:`${Math.random()}${Date.now()}`
 
-  console.log("this is data we have",item.openings)
-
-  return <Card passedData={passedData}></Card>
+  return <Card key={passedData.id} isPressable={true} passedData={passedData}></Card>
 };
 
 

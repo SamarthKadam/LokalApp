@@ -7,6 +7,7 @@ import { FontAwesome,FontAwesome5,AntDesign,Ionicons,Feather} from '@expo/vector
 import { useNavigation } from '@react-navigation/native';
 import Ripple from 'react-native-material-ripple';
 import { useRoute } from '@react-navigation/native';
+import { AddToBookMarks } from '../services';
 
 
 export default function Details() {
@@ -20,15 +21,16 @@ export default function Details() {
     navigation.navigate('Home')
   }
 
-  const AddToBookMarksHandler=()=>{
+  const AddToBookMarksHandler=async()=>{
+    await AddToBookMarks(data);
     ToastAndroid.show('Succesfully Bookmarked',ToastAndroid.SHORT)
   }
 
 
   return (
-    <ScrollView>
-
+    
     <View style={styles.screen}>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.headerContainer}>
         <Pressable onPress={BackIconPressHandler}>
         <Ionicons name="arrow-back-outline" size={28} color="black" />
@@ -47,20 +49,20 @@ export default function Details() {
       </View>
       <View style={styles.detailsContainer}>
         <View style={styles.row}>
-           <Chip type='Expected Salary' value={`${data.salary.min/1000}k-${data.salary.max/1000}k`} icon={<FontAwesome name="money" size={24} color="black" />}  color='#EBF6F9'></Chip>
-           <Chip type='Job Type' value='FullTime' icon={<FontAwesome5 name="briefcase" size={24} color="black" />}  color='#F9EBEB'></Chip>
+           <Chip key={1} type='Expected Salary' value={`${data.salary.min/1000}k-${data.salary.max/1000}k`} icon={<FontAwesome name="money" size={24} color="black" />}  color='#EBF6F9'></Chip>
+           <Chip key={2} type='Job Type' value='FullTime' icon={<FontAwesome5 name="briefcase" size={24} color="black" />}  color='#F9EBEB'></Chip>
         </View>
         <View style={styles.row}>
-        <Chip type='Views' value={data.views} icon={<AntDesign name="eyeo" size={24} color="black" />}  color='#F4F9EB'></Chip>
-        <Chip type='Openings' value={data.openings} icon={<Feather name="users" size={24} color="black" />}  color='#EBECF9'></Chip>
+        <Chip key={3} type='Views' value={data.views} icon={<AntDesign name="eyeo" size={24} color="black" />}  color='#F4F9EB'></Chip>
+        <Chip key={4} type='Openings' value={data.openings} icon={<Feather name="users" size={24} color="black" />}  color='#EBECF9'></Chip>
         </View>
       </View>
       <View style={styles.descriptionContainer}>
         <Text style={{fontFamily:'Poppins_600SemiBold',fontSize:18}}>Job description</Text>
         <Text style={{fontFamily:'Poppins_400Regular',color:'grey',fontSize:13}}>{data.description} </Text>
       </View>
-    </View>
     </ScrollView>
+    </View>
   )
 }
 
